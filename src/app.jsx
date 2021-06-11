@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Movies from './components/movies';
+import Movie from './components/movie/movie';
 import styles from './app.module.css';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         setMovies(res.data.data.movies);
         setIsLoding(false);
       })
-      .catch((err) => console.log('에러 발생 (o_0;)', err));
+      .catch((err) => console.log('에러 발생! (o_0;)', err));
   }, []);
 
   return (
@@ -28,13 +28,14 @@ function App() {
       ) : (
         <div className={styles.movies}>
           {movies.map((movie) => (
-            <Movies
+            <Movie
               key={movie.id}
               id={movie.id}
               year={movie.year}
+              genres={movie.genres}
               title={movie.title}
               summary={movie.summary}
-              poster={movie.medium_civer_image}
+              poster={movie.medium_cover_image}
             />
           ))}
         </div>
